@@ -4,7 +4,7 @@ package lab11;
  * File: Lab11Prob01.java
  * @author Dalton Hall, Oscar Mejia, Alejandro Giron
  * Created on: Apr 17, 2024
- * Modified on: Apr 18, 2024
+ * Modified on: Apr 19, 2024
  * Description:  Reading and writing a copy of people.dat.
  */
 

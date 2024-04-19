@@ -1,3 +1,5 @@
+package lab11;
+
 /**
  * File: Lab11Prob01.java
  * @author Dalton Hall, Oscar Mejia, Alejandro Giron
@@ -13,38 +15,37 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-public class Lab11Prob01 {
+public class Lab11Prob01 implements Serializable {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		try ( // Create an input stream for file people.dat
 				DataInputStream input = new DataInputStream(new FileInputStream("src/people.dat"));
+				DataOutputStream output = new DataOutputStream(new FileOutputStream("src/people-copy.dat"));
 				) {
 
-			// Print info from the file
-			while (true)
-				System.out.printf("%d %s %s %d %.2f\n", input.readInt(), input.readUTF(), input.readUTF(), input.readInt(), input.readDouble());
-		} catch (EOFException ex) {
-			//System.out.println("Reached end of file");
-		}
-		
-		try ( // Create an input and output stream for file people.dat
-				DataInputStream input = new DataInputStream(new FileInputStream("src/people.dat"));
-				DataOutputStream output = new DataOutputStream(new FileOutputStream("src/people-copy.dat"));
-			) {
 			// Make copy of file.
-			while (true) {
+			while (input.read() != - 1) {
 				output.writeInt(input.readInt());
 				output.writeUTF(input.readUTF());
 				output.writeUTF(input.readUTF());
 				output.writeInt(input.readInt());
 				output.writeDouble(input.readDouble());
 			}
-			}
-			catch (EOFException ex) {
-				//System.out.println("Finished Copying");
-			}
-	
 
-}}
+		} catch (EOFException ex) {
+			//System.out.println("Reached end of file");
+		}
+
+		try ( // Create an input  people.dat
+				DataInputStream newInput = new DataInputStream(new FileInputStream("src/people-copy.dat"));
+				) {
+			// Print out results from copied file
+			while (newInput.read() != - 1)
+				System.out.printf("%d %s %s %d %.2f\n", newInput.readInt(), newInput.readUTF(), newInput.readUTF(), newInput.readInt(), newInput.readDouble());
+		}
+		catch (EOFException ex) {
+			//System.out.println("Finished Copying");
+		}
+	}}

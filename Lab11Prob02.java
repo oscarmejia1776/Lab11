@@ -1,4 +1,4 @@
-package lab11;
+//package lab11;
 
 /**
  * File: Lab11Prob02.java
@@ -30,7 +30,7 @@ public class Lab11Prob02 {
 
 
 			// Print info from the file
-			while (input.read() != - 1) {
+			while (true) {
 				int age = input.readInt();
 				String name = input.readUTF();
 				String address = input.readUTF();
